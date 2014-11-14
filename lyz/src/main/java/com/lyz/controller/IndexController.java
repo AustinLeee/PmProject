@@ -16,6 +16,7 @@ public class IndexController {
 		log.debug("going index()");
 		String message = "Hello World !";
 		model.addAttribute("helloMessage", message);
+		System.out.println("asdfasfasdfasd");
 		return "index";
 	}
 
