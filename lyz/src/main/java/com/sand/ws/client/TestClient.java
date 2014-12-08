@@ -1,5 +1,10 @@
 package com.sand.ws.client;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.regex.Pattern;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
@@ -9,30 +14,8 @@ import org.apache.cxf.transport.http.HTTPConduit;
 
 public class TestClient {
 
-	public static void main(String[] args) {
-
-		String userName = "carrefour"; // 商户ID，待告知
-		String password = "ff3fe2e028a2f1b5"; // 用户密码,待告知
-		String qryType = "0"; // 查询类型固定为根据退货单号（单据编号）查询
-		String returnGoodsNum = "CR201410220929501810173";
-		String endpoint = "https://220.248.12.124:36666/CarrefourRefund/Refund?wsdl";
-		String res = "";
-		SSLUtilities.trustAllHostnames();
-		RefundService refundService = new RefundService();
-		System.out.println("endpoint:" + endpoint);
-		System.out.println("userName:" + userName);
-		System.out.println("password:" + password);
-		System.out.println("qryType:" + qryType);
-		System.out.println("returnGoodsNum:" + returnGoodsNum);
-		RefundServiceDelegate port = refundService.getRefund();
-		HTTPConduit httpConduit = (HTTPConduit) ClientProxy.getClient(port).getConduit();
-		TLSClientParameters tlsCP = new TLSClientParameters();
-		// other TLS/SSL configuration like setting up TrustManagers
-		tlsCP.setDisableCNCheck(true);
-		httpConduit.setTlsClientParameters(tlsCP);
-		res = port.queryGoodsReturnSsl(userName, password, qryType, returnGoodsNum);
-		System.out.println("res:" + res);
-
+	public static void main(String[] args) throws FileNotFoundException {
+		System.out.println(new Double(0.0).equals(0.0));
 	}
 
 	protected static HostnameVerifier hv = new HostnameVerifier() {
