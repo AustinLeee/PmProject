@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.cxf.configuration.jsse.TLSClientParameters;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.transport.http.HTTPConduit;
@@ -15,7 +16,7 @@ import org.apache.cxf.transport.http.HTTPConduit;
 public class TestClient {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		System.out.println(new Double(0.0).equals(0.0));
+		System.out.println(StringUtils.replace("a\\a","\\", "\\\\\\"));
 	}
 
 	protected static HostnameVerifier hv = new HostnameVerifier() {
