@@ -7,15 +7,33 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath:applicationContext.xml
-		</param-value>
+		<param-value>classpath:resources/applicationContext.xml</param-value>
 	</context-param>
-
+	<context-param>      
+		<param-name>proxoolConfigLocation</param-name>      
+		<param-value>WEB-INF/classes/resources/proxool.xml</param-value>  
+	</context-param>  
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/resources/log4j.properties</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>600000</param-value>
+    </context-param>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>javass.webapp.root</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+	<listener>      
+		<listener-class>org.logicalcobwebs.proxool.configuration.ListenerConfigurator</listener-class> 
+	</listener>  
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -24,7 +42,6 @@
 			<param-value>UTF-8</param-value>
 		</init-param>
 	</filter>
-
 	<filter-mapping>
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -36,16 +53,26 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:mvc-dispatcher-servlet.xml
+				classpath:resources/mvc-dispatcher-servlet.xml
 			</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>0</load-on-startup>
+		<async-supported>true</async-supported>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!--查看proxool运行情况，也可以不作配置的-->
+ 	<servlet>
+  		<servlet-name>proxooladmin</servlet-name>
+  		<servlet-class>org.logicalcobwebs.proxool.admin.servlet.AdminServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+  		<servlet-name>proxooladmin</servlet-name>
+  		<url-pattern>/proxooladmin</url-pattern>
+ 	</servlet-mapping>
 
 </web-app>
 
